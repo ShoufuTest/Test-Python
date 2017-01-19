@@ -30,10 +30,17 @@ def signif_form():
 
 @app.route('/signin', methods=['POST'])
 def signin():
+    print request.form
     username = request.form['username']
     password = request.form['password']
     if username == 'admin' and password == 'password':
         return render_template('signin-ok.html', username=username)
-    return render_template('form-html', message='Bad username or password', username=username)
+    return render_template('form.html', message='Bad username or password', username=username)
 
-app.run()
+# Default route, print user's IP
+@app.route('/ip')
+def index():
+    ip = request.remote_addr
+    return render_template('index.html', user_ip=ip)
+
+app.run(debug=True)

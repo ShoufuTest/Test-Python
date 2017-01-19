@@ -35,9 +35,9 @@ def format_addr(string):
     addr_encode = addr.encode('utf-8')
     return formataddr((header_encode, addr_encode if isinstance(addr, unicode) else addr))
 
-from_addr = 'gyming2015@163.com'
-password = 'koucuhoezmipgmre'
-smtp_server = 'smtp.163.com'
+_from_addr = 'gyming2015@163.com'
+_password = 'koucuhoezmipgmre'
+_smtp_server = 'smtp.163.com'
 to_addr = '407886535@qq.com'
 
 text = 'hehe'
@@ -46,13 +46,13 @@ msg = MIMEMultipart()
 msg.attach(MIMEText(text, 'plain', 'utf-8'))
 
 attach_file('img/git-cheatsheet.pdf')
-msg['from'] = format_addr('GYMing <%s>' % from_addr)
+msg['from'] = format_addr('GYMing <%s>' % _from_addr)
 msg['to'] = format_addr('收件人小呵呵 <%s>' % to_addr)
 msg['subject'] = Header('邮件标题嘿嘿嘿', 'utf-8')
 
-server = smtplib.SMTP(smtp_server, 25)
+server = smtplib.SMTP(_smtp_server, 25)
 server.starttls()
 server.set_debuglevel(1)
-server.login(from_addr, password)
-server.sendmail(from_addr, [to_addr], msg.as_string())
+server.login(_from_addr, _password)
+server.sendmail(_from_addr, [to_addr], msg.as_string())
 server.quit()
